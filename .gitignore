@@ -1,0 +1,6 @@
+# files
+conf.yaml
+
+# folders
+personal/
+.venv/
