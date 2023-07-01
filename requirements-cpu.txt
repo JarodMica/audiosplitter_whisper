@@ -6,3 +6,4 @@ torchaudio
 pysrt
 pydub
 pyyaml
+wheel

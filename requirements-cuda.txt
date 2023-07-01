@@ -7,3 +7,4 @@ torchaudio==2.0.1
 pysrt
 pydub
 pyyaml
+wheel

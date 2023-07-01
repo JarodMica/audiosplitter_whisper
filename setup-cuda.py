@@ -6,7 +6,7 @@ import venv
 def create_virtual_environment():
     # Create a virtual environment in the "venv" directory
     try:
-        venv.create('venv-cuda', with_pip=True)
+        venv.create('venv', with_pip=True)
     except Exception as e:
         print(f"Failed to create virtual environment. Error: {e}")
         sys.exit(1)
@@ -26,11 +26,9 @@ def install_requirements():
         print(f"Failed to install requirements. Error: {e}")
         sys.exit(1)
 
-
 def main():
     create_virtual_environment()
     install_requirements()
-
 
 if __name__ == '__main__':
     main()
