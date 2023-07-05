@@ -3,4 +3,5 @@ conf.yaml
 
 # folders
 personal/
+venv/
 .venv/
