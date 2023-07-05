@@ -43,8 +43,7 @@ def diarize_audio_with_srt(audio_file, srt_file, output_dir, padding=0.0):
 
     for i, sub in enumerate(subs):
         # Extract speaker from subtitle
-        speaker = sub.text.split(']')[0][1:]
-        speaker = re.sub(r"[<>:\"/\\|?*]+", '', speaker1)
+        speaker = re.sub(r"[[<>:\"/\\|?*]+", '', sub.text).split(']')[0]
 
         # Create speaker-specific output directory
         speaker_dir = os.path.join(output_dir, speaker)
