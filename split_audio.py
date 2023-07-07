@@ -7,6 +7,7 @@ import torch
 import re
 import unicodedata
 
+
 from tkinter import filedialog
 from pydub import AudioSegment
 
@@ -59,6 +60,7 @@ def diarize_audio_with_srt(audio_file, srt_file, output_dir, padding=0.0):
         # Extract speaker from subtitle
         speaker = sub.text.split(']')[0][1:]
         sanitized_speaker = sanitize_filename(speaker)
+
 
         # Create speaker-specific output directory
         speaker_dir = os.path.join(output_dir, sanitized_speaker)
