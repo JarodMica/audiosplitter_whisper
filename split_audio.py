@@ -5,6 +5,8 @@ import pysrt
 import tkinter as tk
 import torch
 import re
+import unicodedata
+
 
 from tkinter import filedialog
 from pydub import AudioSegment
@@ -26,6 +28,19 @@ else:
     compute_type = "int8"
     print('CUDA is not available. Running on CPU.')
 
+def sanitize_filename(filename):
+    # Remove diacritics and normalize Unicode characters
+    normalized = unicodedata.normalize('NFKD', filename)
+    sanitized = ''.join(c for c in normalized if not unicodedata.combining(c))
+    
+    # Regular Expression to match invalid characters
+    invalid_chars_pattern = r'[<>:"/\\|?*]'
+    
+    # Replace invalid characters with an underscore
+    sanitized_filename = re.sub(invalid_chars_pattern, '_', sanitized)
+    
+    return sanitized_filename
+
 def diarize_audio_with_srt(audio_file, srt_file, output_dir, padding=0.0):
     '''
     Use whisperx generated SRT files in order to split the audio files with speaker
@@ -43,10 +58,12 @@ def diarize_audio_with_srt(audio_file, srt_file, output_dir, padding=0.0):
 
     for i, sub in enumerate(subs):
         # Extract speaker from subtitle
-        speaker = re.sub(r"[[<>:\"/\\|?*]+", '', sub.text).split(']')[0]
+        speaker = sub.text.split(']')[0][1:]
+        sanitized_speaker = sanitize_filename(speaker)
+
 
         # Create speaker-specific output directory
-        speaker_dir = os.path.join(output_dir, speaker)
+        speaker_dir = os.path.join(output_dir, sanitized_speaker)
         if not os.path.exists(speaker_dir):
             os.makedirs(speaker_dir)
 
