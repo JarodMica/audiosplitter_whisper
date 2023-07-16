@@ -2,31 +2,11 @@ import os
 import subprocess
 import yaml
 import pysrt
-import tkinter as tk
 import torch
 import re
 import unicodedata
 
-
-from tkinter import filedialog
 from pydub import AudioSegment
-
-with open("conf.yaml", "r") as file:
-    settings = yaml.safe_load(file)
-
-language = settings["language"]
-whisper_model = settings["model"]
-hf_token = settings["HF_token"]
-diarize = settings["diarize"]
-
-if torch.cuda.is_available():
-    device = 'cuda'
-    compute_type = "float16"
-    print('CUDA is available. Running on GPU.')
-else:
-    device = 'cpu'
-    compute_type = "int8"
-    print('CUDA is not available. Running on CPU.')
 
 def sanitize_filename(filename):
     # Remove diacritics and normalize Unicode characters
@@ -144,8 +124,7 @@ def run_whisperx(audio_files, output_dir):
                     "--language", language,
                     "--output_format", "srt",
                     "--compute_type", compute_type])
-    
-    
+
 def create_directory(name):
     if not os.path.exists(name):
         os.makedirs(name)
@@ -184,8 +163,8 @@ def process_audio_files(input_folder):
         else: 
             extract_audio_with_srt(audio_file_path, srt_file, speaker_segments_dir)
 
-# Choose input folder containing MP3 files using file dialog
-root = tk.Tk()
-root.withdraw()
-input_folder = filedialog.askdirectory(title="Select input folder")
-process_audio_files(input_folder)
+def choose_input_folder(input_folder):
+    process_audio_files(input_folder)
+
+input_folder = input("Input path to your folder: ")
+choose_input_folder(input_folder)
