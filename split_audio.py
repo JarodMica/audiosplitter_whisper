@@ -8,12 +8,12 @@ import unicodedata
 
 from pydub import AudioSegment
 
-inplan=str(input("Input language (example: en, ua, kz, ja): ")
+inplan=str(input("Input language (example: en, ua, kz, ja): "))
 print('Write model name in ""')
-inpmodel=str(input('Input model "tiny","base","small","medium","large-v2": ')
-inpdiarize=str(input("Use diarization? True/False: ").replace("t", "T").replace("f", "F")
+inpmodel=str(input('Input model "tiny","base","small","medium","large-v2": '))
+inpdiarize=str(input("Use diarization? True/False: ")).replace("t", "T").replace("f", "F")
 if inpdiarize=="True":
-    HF_token=str(input("Input Hugging Face Token: ")
+    HF_token=str(input("Input Hugging Face Token: "))
 if inpdiarize=="False":
     pass
 else:
