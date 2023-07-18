@@ -18,7 +18,7 @@ if yamlus=="n":
     if inpdiarize=="True":
         HF_token=str(input("Input Hugging Face Token: "))
     if inpdiarize=="False":
-        HF_token=False
+        HF_token="Nothing"
         pass
     else:
         print("You needed to input True or False")
