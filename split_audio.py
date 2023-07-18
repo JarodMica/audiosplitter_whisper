@@ -15,7 +15,7 @@ if yaml=="y":
     print('Write model name in ""')
     inpmodel=input('Input model "tiny","base","small","medium","large-v2": ')
     inpdiarize=input("Use diarization? True/False: ").replace("t", "T").replace("f", "F")
-    if inpdiarize:
+    if inpdiarize==True:
         HF_token=input("Input Hugging Face Token: ")
     else:
         HF_token="Nothing"
