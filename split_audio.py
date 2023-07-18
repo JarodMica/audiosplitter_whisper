@@ -20,10 +20,10 @@ if yaml=="y":
     else:
         HF_token="Nothing"
         
-    conf = f"""language : {inplan}
-model : {inpmodel}
-diarize : {inpdiarize}
-HF_token : {HF_token}"""
+    conf = f"language : {inplan}\n"+\
+f"model : {inpmodel}\n"+\
+f"diarize : {inpdiarize}\n"+\
+f"HF_token : {HF_token}\n"
         
     with open('conf.yaml', 'w') as f:
         f.write(conf)
