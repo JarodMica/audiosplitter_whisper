@@ -8,9 +8,9 @@ import unicodedata
 
 from pydub import AudioSegment
 
-yaml=input("Do you wanna write new config? Y/n: ").lower().replace("yes", "y")
+yl=input("Do you wanna write new config? Y/n: ").lower().replace("yes", "y")
 
-if yaml=="y":
+if yl=="y":
     inplan=input("Input language (example: en, ua, kz, ja): ")
     print('Write model name in ""')
     inpmodel=input('Input model "tiny", "base", "small", "medium", "large-v2": ')
