@@ -7,23 +7,25 @@ import re
 import unicodedata
 
 from pydub import AudioSegment
+yaml=str(input("Do you wanna write new config? Y/n: ")).lower().replace("yes", "y")
 
-inplan=str(input("Input language (example: en, ua, kz, ja): "))
-print('Write model name in ""')
-inpmodel=str(input('Input model "tiny","base","small","medium","large-v2": '))
-inpdiarize=str(input("Use diarization? True/False: ")).replace("t", "T").replace("f", "F")
-if inpdiarize=="True":
-    HF_token=str(input("Input Hugging Face Token: "))
-if inpdiarize=="False":
-    HF_token=str("Nothing")
-    
-conf = f"""language : {inplan}
-model : {inpmodel}
-diarize : {inpdiarize}
-F_token : {HF_token}"""
-    
-with open('conf.yaml', 'w') as f:
-    f.write(conf)   
+if yaml=="y":
+    inplan=str(input("Input language (example: en, ua, kz, ja): "))
+    print('Write model name in ""')
+    inpmodel=str(input('Input model "tiny","base","small","medium","large-v2": '))
+    inpdiarize=str(input("Use diarization? True/False: ")).replace("t", "T").replace("f", "F")
+    if inpdiarize=="True":
+        HF_token=str(input("Input Hugging Face Token: "))
+    if inpdiarize=="False":
+        HF_token=str("Nothing")
+        
+    conf = f"""language : {inplan}
+    model : {inpmodel}
+    diarize : {inpdiarize}
+    HF_token : {HF_token}"""
+        
+    with open('conf.yaml', 'w') as f:
+        f.write(conf)   
 
 with open("conf.yaml", "r") as file:
     settings = yaml.safe_load(file)
