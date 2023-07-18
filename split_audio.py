@@ -13,7 +13,7 @@ yaml=input("Do you wanna write new config? Y/n: ").lower().replace("yes", "y")
 if yaml=="y":
     inplan=input("Input language (example: en, ua, kz, ja): ")
     print('Write model name in ""')
-    inpmodel=input('Input model "tiny","base","small","medium","large-v2": ')
+    inpmodel=input('Input model "tiny", "base", "small", "medium", "large-v2": ')
     inpdiarize=input("Use diarization? True/False: ").replace("t", "T").replace("f", "F")
     if inpdiarize==True:
         HF_token=input("Input Hugging Face Token: ")
