@@ -17,7 +17,7 @@ if yaml=="y":
     if inpdiarize=="True":
         HF_token=str(input("Input Hugging Face Token: "))
     if inpdiarize=="False":
-        HF_token=str("Nothing")
+        HF_token="Nothing"
         
     conf = f"""language : {inplan}
     model : {inpmodel}
