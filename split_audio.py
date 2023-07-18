@@ -15,7 +15,7 @@ inpdiarize=str(input("Use diarization? True/False: ")).replace("t", "T").replace
 if inpdiarize=="True":
     HF_token=str(input("Input Hugging Face Token: "))
 if inpdiarize=="False":
-    HF_token="Nothing"
+    HF_token=str("Nothing")
     
 conf = f"""language : {inplan}
 model : {inpmodel}
