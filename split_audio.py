@@ -14,10 +14,10 @@ if yaml=="y":
     inplan=input("Input language (example: en, ua, kz, ja): ")
     print('Write model name in ""')
     inpmodel=input('Input model "tiny","base","small","medium","large-v2": ')
-    inpdiarize=str(input("Use diarization? True/False: ")).replace("t", "T").replace("f", "F")
-    if inpdiarize=="True":
+    inpdiarize=input("Use diarization? True/False: ").replace("t", "T").replace("f", "F")
+    if inpdiarize:
         HF_token=input("Input Hugging Face Token: ")
-    if inpdiarize=="False":
+    else:
         HF_token="Nothing"
         
     conf = f"""language : {inplan}
