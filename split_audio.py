@@ -204,5 +204,5 @@ def process_audio_files(input_folder):
 def choose_input_folder(input_folder):
     process_audio_files(input_folder)
 
-input_folder = input("Input path to your folder: ")
+input_folder = input("Input path to your folder: ").replace("/", "\\")
 choose_input_folder(input_folder)
