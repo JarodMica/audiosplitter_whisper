@@ -44,7 +44,7 @@ if yl=="y":
         f.write(conf)
 
 elif yl=="n" and os.path.exists("/content/WHISPERX_VER"):
-    loadquestion=input("Do you wanna load config from google drive? Y/n": ).lower()
+    loadquestion=input("Do you wanna load config from google drive? Y/n :").lower()
     loadquestion=loadquestion[:1]
 
     if loadquestion=="y":
