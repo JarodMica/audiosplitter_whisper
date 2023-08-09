@@ -5,11 +5,11 @@ import pysrt
 import torch
 import re
 import unicodedata
-from sys import platform
 
 from pydub import AudioSegment
 
-yl=input("Do you wanna write new config? Y/n: ").lower().replace("yes", "y")
+yl=input("Do you wanna write new config? Y/n: ").lower()
+yl=yl[:1]
 
 if yl=="y":
     inplan=input("Input language (example: en, ua, kz, ja): ")
@@ -25,9 +25,34 @@ if yl=="y":
     f"model : {inpmodel}\n"+\
     f"diarize : {inpdiarize}\n"+\
     f"HF_token : {HF_token}\n"
-        
+
+    if os.path.exists("/content/WHISPERX_VER"):
+        savequestion=input("Do you wanna save your config to google drive? (Y/n)").lower()
+        savequestion=savequestion[:1]
+        if savequestion=="y":
+            savequestion=True
+        elif savequestion=="n":
+            savequestion=False
+        else:
+            raise ValueError("Just enter yes or no.")
+    
+    if savequestion:
+        with open('/content/drive/MyDrive/conf.yaml', 'w') as f:
+            f.write(conf)
+    
     with open('conf.yaml', 'w') as f:
         f.write(conf)
+
+elif yl=="n" and os.path.exists("/content/WHISPERX_VER"):
+    loadquestion=input("Do you wanna load config from google drive? Y/n").lower()
+    loadquestion=loadquestion[:1]
+
+    if loadquestion=="y":
+        if os.path.exists("/content/drive/MyDrive/conf.yaml"):
+            os.system(f"cp '/content/drive/MyDrive/conf.yaml' '/content/audiosplitter_whisper/conf.yaml'")
+        else:
+            raise ImportError("conf.yaml doesn't exists on your google drive.")
+        
 
 with open("conf.yaml", "r") as file:
     settings = yaml.safe_load(file)
@@ -227,9 +252,9 @@ def choose_input_folder(input_folder):
     
 input_folder = input("Input path to your folder: ")
 
-if platform == "linux" or platform == "linux2":
-    input_folder=input_folder
-elif platform == "win32":
+if os.name == "nt":
     input_folder=input_folder.replace("/", "\\")
+else:
+    input_folder=input_folder
     
 choose_input_folder(input_folder)
