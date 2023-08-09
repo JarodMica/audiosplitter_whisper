@@ -15,7 +15,7 @@ if yl=="y":
     inplan=input("Input language (example: en, ua, kz, ja): ")
     print('Write model name in ""')
     inpmodel=input('Input model "tiny", "base", "small", "medium", "large-v2": ')
-    inpdiarize=input("Use diarization? True/False: ").replace("t", "T").replace("f", "F")
+    inpdiarize=input("Use diarization? True/False: ")
     if inpdiarize==True:
         HF_token=input("Input Hugging Face Token: ")
     else:
