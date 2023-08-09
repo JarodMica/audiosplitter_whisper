@@ -5,6 +5,7 @@ import pysrt
 import torch
 import re
 import unicodedata
+from sys import platform
 
 from pydub import AudioSegment
 
@@ -203,6 +204,12 @@ def process_audio_files(input_folder):
 
 def choose_input_folder(input_folder):
     process_audio_files(input_folder)
+    
+input_folder = input("Input path to your folder: ")
 
-input_folder = input("Input path to your folder: ").replace("/", "\\")
+if platform == "linux" or platform == "linux2":
+    input_folder=input_folder
+elif platform == "win32":
+    input_folder=input_folder.replace("/", "\\")
+    
 choose_input_folder(input_folder)
