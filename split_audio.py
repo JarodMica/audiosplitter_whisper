@@ -166,7 +166,7 @@ def run_whisperx(audio_files, output_dir):
                         "--compute_type", compute_type])
     else:
         if diarize:
-            subprocess.run(["$WHISPERX", audio_files, 
+            subprocess.run(["/content/drive/MyDrive/wishp", audio_files, 
                             "--device", device,
                             "--model", whisper_model, 
                             "--output_dir", output_dir, 
@@ -176,7 +176,7 @@ def run_whisperx(audio_files, output_dir):
                             "--output_format", "srt",
                             "--compute_type", compute_type])
         else:
-            subprocess.run(["$WHISPERX", audio_files, 
+            subprocess.run(["/content/drive/MyDrive/wishp", audio_files, 
                         "--device", device,
                         "--model", whisper_model, 
                         "--output_dir", output_dir, 
