@@ -15,7 +15,7 @@ if yl=="y":
     inplan=input("Input language (example: en, ua, kz, ja): ")
     print('Write model name in ""')
     inpmodel=input('Input model "tiny", "base", "small", "medium", "large-v2": ')
-    inpdiarize=input("Use diarization? True/False: ")
+    inpdiarize=input("Use diarization? True/False: ").replace("t", "T").replace("f", "F")
     if inpdiarize==True:
         HF_token=input("Input Hugging Face Token: ")
     else:
@@ -36,8 +36,11 @@ if yl=="y":
         else:
             raise ValueError("Just enter yes or no.")
     
-    if savequestion:
-        with open('/content/drive/MyDrive/conf.yaml', 'w') as f:
+    if savequestion and inpdiarize:
+        with open('/content/drive/MyDrive/conf_diar.yaml', 'w') as f:
+            f.write(conf)
+    else:
+        with open('/content/drive/MyDrive/conf_diar.yaml', 'w') as f:
             f.write(conf)
     
     with open('conf.yaml', 'w') as f:
@@ -48,10 +51,14 @@ elif yl=="n" and os.path.exists("/content/WHISPERX_VER"):
     loadquestion=loadquestion[:1]
 
     if loadquestion=="y":
-        if os.path.exists("/content/drive/MyDrive/conf.yaml"):
+        inpdiarize=input("Use diarization? (N/y): ").lower()
+        inpdiarize=inpdiarize[:1]
+        if os.path.exists("/content/drive/MyDrive/conf_diarization.yaml") and inpdiarize=="y":
+            os.system(f"cp '/content/drive/MyDrive/conf_diarization.yaml' '/content/audiosplitter_whisper/conf.yaml'")
+        elif os.path.exists("/content/drive/MyDrive/conf.yaml") and inpdiarize=="n":
             os.system(f"cp '/content/drive/MyDrive/conf.yaml' '/content/audiosplitter_whisper/conf.yaml'")
         else:
-            raise ImportError("conf.yaml doesn't exists on your google drive.")
+            raise ImportError("conf.yaml or conf_diarization.yaml doesn't exists on your google drive.")
         
 
 with open("conf.yaml", "r") as file:
