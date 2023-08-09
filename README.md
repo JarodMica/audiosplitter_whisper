@@ -28,7 +28,9 @@ python setup-cuda.py
 
 5. Activate the virtual envionrment (venv).
 ```
-venv\Scripts\activate
+Windows cmd: .\venv\Scripts\activate
+
+Linux Terminal: venv\Scripts\activate or venv\bin\activate
 ```
 
 6. If you ran into any permission issues, you'll need to change your windows Execution Policy to Remote Signed.  This does lower security on your system a small bit as it allows for scripts to be ran on your computer, however, only those signed by a Trusted Publisher or verified by you can be run (to my knowledge).  Do at your own risk.
