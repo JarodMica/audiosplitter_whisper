@@ -27,7 +27,7 @@ if yl=="y":
     f"HF_token : {HF_token}\n"
 
     if os.path.exists("/content/WHISPERX_VER"):
-        savequestion=input("Do you wanna save your config to google drive? (Y/n)").lower()
+        savequestion=input("Do you wanna save your config to google drive? (Y/n): ").lower()
         savequestion=savequestion[:1]
         if savequestion=="y":
             savequestion=True
@@ -44,7 +44,7 @@ if yl=="y":
         f.write(conf)
 
 elif yl=="n" and os.path.exists("/content/WHISPERX_VER"):
-    loadquestion=input("Do you wanna load config from google drive? Y/n").lower()
+    loadquestion=input("Do you wanna load config from google drive? Y/n": ).lower()
     loadquestion=loadquestion[:1]
 
     if loadquestion=="y":
