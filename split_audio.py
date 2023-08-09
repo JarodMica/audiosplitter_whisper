@@ -145,24 +145,44 @@ def extract_audio_with_srt(audio_file, srt_file, output_dir, padding=0.0):
 
 def run_whisperx(audio_files, output_dir):
     '''Generate SRT file using whisperx'''
-    if diarize:
-        subprocess.run(["whisperx", audio_files, 
+    if not os.path.exists("/content/WHISPERX_VER"):
+        if diarize:
+            subprocess.run(["whisperx", audio_files, 
+                            "--device", device,
+                            "--model", whisper_model, 
+                            "--output_dir", output_dir, 
+                            "--language", language,
+                            "--diarize",
+                            "--hf_token", hf_token,
+                            "--output_format", "srt",
+                            "--compute_type", compute_type])
+        else:
+            subprocess.run(["whisperx", audio_files, 
                         "--device", device,
                         "--model", whisper_model, 
                         "--output_dir", output_dir, 
                         "--language", language,
-                        "--diarize",
-                        "--hf_token", hf_token,
                         "--output_format", "srt",
                         "--compute_type", compute_type])
     else:
-        subprocess.run(["whisperx", audio_files, 
-                    "--device", device,
-                    "--model", whisper_model, 
-                    "--output_dir", output_dir, 
-                    "--language", language,
-                    "--output_format", "srt",
-                    "--compute_type", compute_type])
+        if diarize:
+            subprocess.run(["$whisperx", audio_files, 
+                            "--device", device,
+                            "--model", whisper_model, 
+                            "--output_dir", output_dir, 
+                            "--language", language,
+                            "--diarize",
+                            "--hf_token", hf_token,
+                            "--output_format", "srt",
+                            "--compute_type", compute_type])
+        else:
+            subprocess.run(["$whisperx", audio_files, 
+                        "--device", device,
+                        "--model", whisper_model, 
+                        "--output_dir", output_dir, 
+                        "--language", language,
+                        "--output_format", "srt",
+                        "--compute_type", compute_type])
 
 def create_directory(name):
     if not os.path.exists(name):
