@@ -2,7 +2,7 @@
 Created with the purpose for curating datasets for the sake of training AI models.  This is created with RVC (Retrieval-based Voice Conversion) in mind but generally works for any other AI voice model that needs short clips less than 10s.
 
 ## Youtube Video Tutorial
-<insert tutorial later>
+https://youtu.be/9lsSSPnF67Q
 
 ## Prerequisites
 - Python 3.10 installation
