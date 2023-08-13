@@ -8,6 +8,8 @@ Created with the purpose for curating datasets for the sake of training AI model
 - Python 3.10 installation
 - git installation
 - vscode installation (highly recommended)
+- ffmpeg installation
+- Cuda Capable Nvidia GPU (highly recommended)
 
 ## Installation and basic usage
 1. Clone the repository (repo)

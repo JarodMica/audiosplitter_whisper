@@ -2,5 +2,6 @@
 language : "en"
 # Choices: ["tiny","base","small","medium","large-v2"]
 model : "large-v2"
+one_folder : False
 diarize : False
 HF_token : ENTER_YOUR_HUGGINGFACE_TOKEN
