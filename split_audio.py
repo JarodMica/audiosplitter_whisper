@@ -38,7 +38,15 @@ def sanitize_filename(filename):
     invalid_chars_pattern = r'[<>:"/\\|?*]'
 
     # Replace invalid characters with an underscore
-    return re.sub(invalid_chars_pattern, '_', sanitized)
+    sanitized = re.sub(invalid_chars_pattern, '_', sanitized)
+    
+		# Remove trailing spaces and periods
+    remove_trailing_periods = r'\.+$'
+    remove_trailing_spaces = r' +$'
+    sanitized = re.sub(remove_trailing_periods, '', sanitized)
+    sanitized = re.sub(remove_trailing_spaces, '', sanitized)
+    
+    return sanitized
 
 
 def get_output_filename():
