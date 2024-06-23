@@ -7,3 +7,4 @@ pysrt
 pydub
 pyyaml
 wheel
+numpy==1.26.4
