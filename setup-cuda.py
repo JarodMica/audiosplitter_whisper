@@ -21,7 +21,7 @@ def install_requirements():
     
     # Use the Python interpreter in the virtual environment to run pip
     try:
-        subprocess.run([python_bin, '-m', 'pip', 'install', '-r', 'requirements-cuda.txt'], check=True)
+        subprocess.run([python_bin, '-m', 'pip', 'install', '-r', 'requirements-cuda.txt', '--use-pep517'], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Failed to install requirements. Error: {e}")
         sys.exit(1)
