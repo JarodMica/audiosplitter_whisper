@@ -16,7 +16,7 @@ FILE_COUNTER = 0
 
 
 def load_settings(config_path):
-    with open(config_path, "r") as file:
+    with open(config_path, "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
 
 
@@ -30,7 +30,7 @@ def get_device_info():
 
 
 def sanitize_filename(filename):
-    # Remove diacritics and normalize Unicode characters
+     # Remove diacritics and normalize Unicode characters
     normalized = unicodedata.normalize('NFKD', filename)
     sanitized = ''.join(c for c in normalized if not unicodedata.combining(c))
 
@@ -38,7 +38,7 @@ def sanitize_filename(filename):
     invalid_chars_pattern = r'[<>:"/\\|?*]'
 
     # Replace invalid characters with an underscore
-    return re.sub(invalid_chars_pattern, '_', sanitized)
+     return re.sub(invalid_chars_pattern, '_', sanitized)
 
 
 def get_output_filename():
@@ -74,7 +74,7 @@ def diarize_audio_with_srt(audio_file, srt_file, output_dir):
 
     '''
     audio = AudioSegment.from_file(audio_file)
-    subs = pysrt.open(srt_file)
+    subs = pysrt.open(srt_file, encoding="utf-8")
     for sub in subs:
         speaker = sub.text.split(']')[0][1:]
         sanitized_speaker = sanitize_filename(speaker)
@@ -93,7 +93,8 @@ def extract_audio_with_srt(audio_file, srt_file, output_dir):
         - output_dir(str) - drectory for the outputted files
     '''
     audio = AudioSegment.from_file(audio_file)
-    subs = pysrt.open(srt_file)
+    print(f"Trying to open .srt file at: {srt_file}")
+    subs = pysrt.open(srt_file, encoding="utf-8")
     os.makedirs(output_dir, exist_ok=True)
     for sub in subs:
         process_subtitle(audio, sub, output_dir)
@@ -110,9 +111,8 @@ def run_whisperx(audio_files, output_dir, settings, device, compute_type):
     
     if settings["diarize"]:
         base_cmd.extend(["--diarize", "--hf_token", settings["HF_token"]])
-
-    subprocess.run(base_cmd)
-
+         subprocess.run(base_cmd)
+  
 
 def process_audio_files(input_folder, settings):
     output_dir = os.path.join(input_folder, "output")
@@ -130,8 +130,7 @@ def process_audio_files(input_folder, settings):
         if not audio_file.endswith(AUDIO_EXT):
             wav_file_path = os.path.join(wav_dir, f"{os.path.splitext(audio_file)[0]}{AUDIO_EXT}")
             try:
-                
-                subprocess.run(['ffmpeg', '-i', audio_file_path, wav_file_path], check=True)
+                subprocess.run(['ffmpeg', '-i', audio_file_path, wav_file_path], check=True, text=True, encoding="utf-8")
                 audio_file_path = wav_file_path
             except subprocess.CalledProcessError as e:
                 print(f"Error: {e.output}. Couldn't convert {audio_file} to {AUDIO_EXT} format.")
@@ -139,7 +138,8 @@ def process_audio_files(input_folder, settings):
 
         run_whisperx(audio_file_path, output_dir, settings, device, compute_type)
         srt_file = os.path.join(output_dir, f"{os.path.splitext(audio_file)[0]}.srt")
-        
+
+       
         # Set the output directory for speaker segments to be a subdirectory named after the .wav file
         speaker_segments_dir = os.path.join(output_dir, os.path.splitext(audio_file)[0])
         os.makedirs(speaker_segments_dir, exist_ok=True)
